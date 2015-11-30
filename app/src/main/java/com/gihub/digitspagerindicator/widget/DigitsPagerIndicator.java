@@ -112,37 +112,23 @@ public class DigitsPagerIndicator extends View {
 
         float dX = longOffset + cx + mPageOffset * threeRadius;
         canvas.drawCircle(dX, shortOffset, mRadius, mPaintFill);
-//        Log.e("e", "shortOffset==" + shortOffset+"    mRadius"+mRadius);
-//        canvas.drawText("" + (mCurrentPage + 1), dX, dY + 9, mPaintCharIndex);
 
-
-        int position = -1;
-        for (int i = 0; i < mPageCount; i++) {
-            float x = longOffset + (i * threeRadius);
-            if (x >= dX - mRadius && x <= dX + mRadius) {
-                position = i;
-                break;
-            }
-        }
-
-        drawText(canvas, position, threeRadius, longOffset, shortOffset);
-
-    }
-
-    private void drawText(Canvas canvas, int position, final float threeRadius, final float longOffset, final float shortOffset) {
-        float dX;
         Paint.FontMetricsInt fontMetrics = mPaintCharIndex.getFontMetricsInt();
         int baseline = (int) ((shortOffset*2 -fontMetrics.bottom - fontMetrics.top)/2);
         for (int i = 0; i < mPageCount; i++) {
-            dX = longOffset + (i * threeRadius);
-            if (i == position) {
-                canvas.drawText("" + (i + 1), dX, baseline, mPaintCharIndex);
+            float x = longOffset + (i * threeRadius);
+            if (x >= dX - mRadius && x <= dX + mRadius) {
+                canvas.drawText("" + (i + 1), x, baseline, mPaintCharIndex);
             } else {
-                canvas.drawText("" + (i + 1), dX, baseline, mPaintChar);
+                canvas.drawText("" + (i + 1), x, baseline, mPaintChar);
 
             }
         }
+
+
     }
+
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
